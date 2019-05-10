@@ -1,6 +1,6 @@
 module.exports = {
-    title: "David Banville",
-    description: "Some guy's website",
+    title: "Introducing the MuPo",
+    description: "The MuPo, a BBC Microbit add-on at the crossroads of music and potentionmeters",
     themeConfig: {
         nav: [
             {text: 'Page 1', link: 'page1.md'},

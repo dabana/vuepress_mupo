@@ -4,7 +4,9 @@ You can make your own little production for as little as 20$ canadian.
 
 ## Order the parts
 
-From Digikey 
+Most of the parts can be order from Digikey: ![Part list from Digikey](./images/digikey_ordre.png)
+
+Put the slim form factor potentiometers I found only at Mouser: ![Slim form factor potentiometers](./images/mouser_ordre.png)
 
 ## Get the PCB
 
