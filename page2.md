@@ -18,4 +18,8 @@ Put the slim form factor potentiometers I found only at Mouser: ![Slim form fact
 
 #### 1-Toner transfer panelized version using a heat press
 
+1. Print the provided panelized PCB on magazine or transfer paper
+
+
+
 #### 2-Etch with heat and ferric chloride dilution

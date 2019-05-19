@@ -1,1 +1,5 @@
-# This is page 3!
+# Sample code!
+
+## Micro Python code
+
+## Makecode
