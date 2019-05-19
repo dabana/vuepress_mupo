@@ -1,25 +1,23 @@
-# Make your own small production
+# Have your own MuPo
 
-You can make your own little production for as little as 20$ canadian.
+## Buy it from an online store
 
-## Order the parts
+## Make your own MuPo
 
-Most of the parts can be order from Digikey: ![Part list from Digikey](./images/digikey_ordre.png)
+You can assemble your own MuPo for as little as 20$ canadian.
 
-Put the slim form factor potentiometers I found only at Mouser: ![Slim form factor potentiometers](./images/mouser_ordre.png)
+### Order the parts
 
-## Get the PCB
+I ordered most of the parts from Digikey. Here is the bill of material for building 11 MuPos.
 
-### From a fabrication facility
+![Part list from Digikey](./images/digikey_ordre.png)
 
-### Do it yourself
+The only parts not available at Digikey are the slim form factor thumb wheel potentiometers. I found them at Mouser.
 
+![Slim form factor potentiometers](./images/mouser_ordre.png)
 
+### Get the PCB
 
-#### 1-Toner transfer panelized version using a heat press
+#### Order it from a fab
 
-1. Print the provided panelized PCB on magazine or transfer paper
-
-
-
-#### 2-Etch with heat and ferric chloride dilution
+#### Etch it yourself
