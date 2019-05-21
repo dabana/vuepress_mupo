@@ -12,7 +12,7 @@ I ordered most of the parts from Digikey. Here is the bill of material for build
 
 ![Part list from Digikey](./images/digikey_ordre.png)
 
-The only parts not available at Digikey are the slim form factor thumb wheel potentiometers. I found them at Mouser.
+The only parts not available at Digikey are the slim form factor thumb wheel potentiometers. The one I used for this design are manufactured by ALPS under the part number RK14J11R000J. I found them at Mouser for 1.35 CAD each.
 
 ![Slim form factor potentiometers](./images/mouser_ordre.png)
 
