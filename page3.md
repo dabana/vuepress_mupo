@@ -1,8 +1,8 @@
 # Sample code!
 
-### Tetris
+## Tetris
 
-#### Micro-Python
+### Micro-Python
 ```
 from microbit import *
 import math
@@ -169,9 +169,9 @@ while True:
         xi_prev = x_index
         refreshDisplay(shape_obj, ground_obj)
 ```
-### Music synthetiser
+## Music synthetiser
 
-#### Micro-Python
+### Micro-Python
 ```
 from microbit import *
 import speech
@@ -202,13 +202,13 @@ while True:
         string = speech.translate("Rock the ")
         speech.pronounce(string,speed=120, pitch=pin2value, throat=100, mouth=pin1value)
 ```
-#### Makecode
+### Makecode
 
-![Part list from Digikey](./makecode/makecode_letters_chat.png)
+![Part list from Digikey](./makecode/makecode_chat_application.png)
 
-### Chat application
+## Chat application
 
-#### Micro-Python
+### Micro-Python
 ```
 from microbit import *
 import speech
@@ -279,8 +279,4 @@ while True:
             i += 1
         sleep(250)
 ```
-#### Makecode
-
-
-
-## Makecode
+### Makecode
