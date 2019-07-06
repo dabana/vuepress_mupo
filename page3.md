@@ -1,9 +1,127 @@
 # Sample code!
 
-## Tetris
+## Music synthetiser
+
+The most trilling demo for the Mupo pot. This sound synthetiser uses the right most potentiometer to control pitch and the left one to control repetion rate.
 
 ### Micro-Python
 ```
+from microbit import *
+import speech
+import music
+import math
+while True:
+    while button_a.is_pressed():
+        pin0.set_analog_period_microseconds(256)
+        pin2value = pin2.read_analog()
+        pin1value = pin1.read_analog()
+        while button_b.is_pressed():
+            duration = pin2.read_analog()
+            step = pin1.read_analog()
+            for i in range(0, 1023, 1):
+                for j in range(0, duration, step):
+                    pin0.write_analog(i)
+            for i in range(1023,0,-1):
+                for j in range(0, duration, step):
+                    pin0.write_analog(i)
+
+        music.pitch(pin2value, pin1value)
+        sleep(pin1value)
+    while button_b.is_pressed():
+        pin2value = pin2.read_analog()
+        pin2value = math.floor(pin2value / 4)
+        pin1value = pin1.read_analog()
+        pin1value = math.floor(pin1value / 4)
+        string = speech.translate("Rock the ")
+        speech.pronounce(string,speed=120, pitch=pin2value, throat=100, mouth=pin1value)
+```
+### Makecode
+
+![Part list from Digikey](./makecode/makecode_synthetizer.png)
+
+## Chat application
+
+### Micro-Python
+```
+from microbit import *
+import speech
+import music
+import math
+import radio
+
+def mapInteger(anInteger, from1, to1, from2, to2):
+    span1 = to1 - from1
+    span2 = to2 - from2
+    scaling_factor = span1 / span2
+    return math.floor(anInteger / scaling_factor)
+
+def selectLetter(alphabet):
+    letter_index = mapInteger(pin1.read_analog(),0,1023,0,len(min_alphabet))
+    letter = alphabet[letter_index]
+    return letter
+
+def send_message(message):
+    display.show(Image.HAPPY)
+    radio.send(message)
+    sleep(1000)
+
+def show_and_pronounce(word):
+    string = speech.translate(word)
+    speech.pronounce(string,speed=120, pitch=100, throat=100, mouth=200)
+    display.scroll(word)
+
+def pronounce(word):
+    string = speech.translate(word)
+    speech.pronounce(string,speed=120, pitch=100, throat=100, mouth=200)
+
+radio.on()
+special_characters = "_?!"
+min_alphabet = "abcdefghijklmnopqrstuvwxyz" + special_characters
+cap_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + special_characters
+outgoing = ""
+
+while True:
+    if button_a.is_pressed():
+        letter = selectLetter(cap_alphabet)
+    else:
+        letter = selectLetter(min_alphabet)
+
+    display.show(letter)
+    incoming = radio.receive()
+    if incoming != None:
+        display.scroll("*** ")
+        show_and_pronounce(incoming)
+        display.scroll("*** ")
+
+    if accelerometer.was_gesture("shake"):
+        show_and_pronounce(outgoing)
+
+    if accelerometer.was_gesture("face down"):
+        pronounce(outgoing)
+
+    i = 0
+    while button_b.is_pressed():
+        if i == 0:
+            outgoing += letter
+            i += 1
+        elif i > 5: #when a pressed for more then 1.25 sec
+            outgoing = outgoing[:-1]
+            send_message(outgoing)
+            break
+        else:
+            i += 1
+        sleep(250)
+```
+### Makecode
+
+![Part list from Digikey](./makecode/makecode_chat_application.png)
+
+## Tetris
+
+Tetris is made out of pure Micro-python. To play this fun game, use the right-most potentiometer to move your piece from left to right, Press B to rotate it and A to place it. You might encounter a memory error when the screens start being full.
+
+### Micro-Python
+```python
 from microbit import *
 import math
 import random
@@ -169,114 +287,3 @@ while True:
         xi_prev = x_index
         refreshDisplay(shape_obj, ground_obj)
 ```
-## Music synthetiser
-
-### Micro-Python
-```
-from microbit import *
-import speech
-import music
-import math
-while True:
-    while button_a.is_pressed():
-        pin0.set_analog_period_microseconds(256)
-        pin2value = pin2.read_analog()
-        pin1value = pin1.read_analog()
-        while button_b.is_pressed():
-            duration = pin2.read_analog()
-            step = pin1.read_analog()
-            for i in range(0, 1023, 1):
-                for j in range(0, duration, step):
-                    pin0.write_analog(i)
-            for i in range(1023,0,-1):
-                for j in range(0, duration, step):
-                    pin0.write_analog(i)
-
-        music.pitch(pin2value, pin1value)
-        sleep(pin1value)
-    while button_b.is_pressed():
-        pin2value = pin2.read_analog()
-        pin2value = math.floor(pin2value / 4)
-        pin1value = pin1.read_analog()
-        pin1value = math.floor(pin1value / 4)
-        string = speech.translate("Rock the ")
-        speech.pronounce(string,speed=120, pitch=pin2value, throat=100, mouth=pin1value)
-```
-### Makecode
-
-![Part list from Digikey](./makecode/makecode_chat_application.png)
-
-## Chat application
-
-### Micro-Python
-```
-from microbit import *
-import speech
-import music
-import math
-import radio
-
-def mapInteger(anInteger, from1, to1, from2, to2):
-    span1 = to1 - from1
-    span2 = to2 - from2
-    scaling_factor = span1 / span2
-    return math.floor(anInteger / scaling_factor)
-
-def selectLetter(alphabet):
-    letter_index = mapInteger(pin1.read_analog(),0,1023,0,len(min_alphabet))
-    letter = alphabet[letter_index]
-    return letter
-
-def send_message(message):
-    display.show(Image.HAPPY)
-    radio.send(message)
-    sleep(1000)
-
-def show_and_pronounce(word):
-    string = speech.translate(word)
-    speech.pronounce(string,speed=120, pitch=100, throat=100, mouth=200)
-    display.scroll(word)
-
-def pronounce(word):
-    string = speech.translate(word)
-    speech.pronounce(string,speed=120, pitch=100, throat=100, mouth=200)
-
-radio.on()
-special_characters = "_?!"
-min_alphabet = "abcdefghijklmnopqrstuvwxyz" + special_characters
-cap_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + special_characters
-outgoing = ""
-
-while True:
-    if button_a.is_pressed():
-        letter = selectLetter(cap_alphabet)
-    else:
-        letter = selectLetter(min_alphabet)
-
-    display.show(letter)
-    incoming = radio.receive()
-    if incoming != None:
-        display.scroll("*** ")
-        show_and_pronounce(incoming)
-        display.scroll("*** ")
-
-    if accelerometer.was_gesture("shake"):
-        show_and_pronounce(outgoing)
-
-    if accelerometer.was_gesture("face down"):
-        pronounce(outgoing)
-
-    i = 0
-    while button_b.is_pressed():
-        if i == 0:
-            outgoing += letter
-            i += 1
-        elif i > 5: #when a pressed for more then 1.25 sec
-            outgoing = outgoing[:-1]
-            send_message(outgoing)
-            break
-        else:
-            i += 1
-        sleep(250)
-```
-### Makecode
